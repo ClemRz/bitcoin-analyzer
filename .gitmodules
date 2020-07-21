@@ -1,0 +1,6 @@
+[submodule "bitcoin-analyzer-front"]
+	path = bitcoin-analyzer-front
+	url = https://github.com/ClemRz/bitcoin-analyzer-front.git
+[submodule "bitcoin-analyzer-back"]
+	path = bitcoin-analyzer-back
+	url = https://github.com/ClemRz/bitcoin-analyzer-back.git
