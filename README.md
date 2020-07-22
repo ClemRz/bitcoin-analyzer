@@ -42,8 +42,10 @@ The rest of the back-end `.env` variables can be set as you wish, both the PHP a
 Make sure the `bitcoin-analyzer-front/.env` is set like so:
 
 ```shell script
-REACT_APP_API_URL=/
+REACT_APP_API_URL=http://localhost:8081/api/%1/%2/%3.json
 ```
+
+#### For development
 
 At the root of the project, run:
 
@@ -51,13 +53,21 @@ At the root of the project, run:
 $ docker-compose -f bitcoin-analyzer-back/docker-compose.yml -f docker-compose.yml up
 ```
 
-Then visit http://localhost:3001/
+Then visit http://localhost:3000
 
-TODO: dev V.S. prod
+#### For production
 
-## Deployment without Docker
+At the root of the project, run:
 
-Please follow the instructions:
+```shell script
+$ docker-compose -f bitcoin-analyzer-back/docker-compose.yml -f docker-compose.prod.yml up
+```
+
+Then visit http://localhost
+
+## Individual modules deployment
+
+If you want to deploy the front and the back individually, please follow these instructions:
 
  - Deploying the front-end: https://github.com/ClemRz/bitcoin-analyzer-front/blob/master/README.md
  - Deploying the back-end: https://github.com/ClemRz/bitcoin-analyzer-back/blob/master/README.md

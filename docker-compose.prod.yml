@@ -1,18 +1,13 @@
 version: '3.8'
 services:
   frontserver:
-    container_name: ba_front_dev
-    image: clemrz/bitcoin-analyzer-front:dev
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-      - CI=true
+    container_name: ba_front_prod
+    image: clemrz/bitcoin-analyzer-front:prod
     build:
       context: ../bitcoin-analyzer-front/
-    volumes:
-      - ../bitcoin-analyzer-front/:/app
-      - /app/node_modules
+      dockerfile: Dockerfile.prod
     ports:
-      - 3000:3000
+      - 80:80
     depends_on:
       - backserver
       - dbserver
