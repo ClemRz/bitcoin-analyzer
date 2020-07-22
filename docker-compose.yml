@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  frontserver:
+    container_name: ba_front_dev
+    image: clemrz/bitcoin-analyzer-front:dev
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CI=true
+    build:
+      context: ../bitcoin-analyzer-front/
+    volumes:
+      - ../bitcoin-analyzer-front/:/app
+      - /app/node_modules
+    ports:
+      - 3001:3000
+    depends_on:
+      - backserver
+      - dbserver
+      - migrations
+    networks:
+      - ba_ntw
+
+networks:
+  ba_ntw:
+    driver: bridge
