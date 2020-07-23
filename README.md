@@ -50,7 +50,9 @@ REACT_APP_API_URL=http://localhost:8081/api/%1/%2/%3.json
 At the root of the project, run:
 
 ```shell script
-$ docker-compose -f bitcoin-analyzer-back/docker-compose.yml -f docker-compose.yml up
+$ docker-compose \
+  -f bitcoin-analyzer-back/docker-compose.yml \ 
+  -f docker-compose.yml up
 ```
 
 Then visit http://localhost:3000
@@ -60,7 +62,9 @@ Then visit http://localhost:3000
 At the root of the project, run:
 
 ```shell script
-$ docker-compose -f bitcoin-analyzer-back/docker-compose.yml -f docker-compose.prod.yml up
+$ docker-compose \
+  -f bitcoin-analyzer-back/docker-compose.yml \
+  -f docker-compose.prod.yml up -d
 ```
 
 Then visit http://localhost
