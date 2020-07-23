@@ -65,11 +65,11 @@ This sums 30h, I'd add a 20% more for unforeseen situations which brings it up t
 
 The following assumptions were made during development of the MVP. For some of them the code allows an easy resolution.
 
- - The app makes available only one currency: USD, assuming our market is domestic (US). It would be fairly easy to evolve the application for more currencies;
- - the value of the bitcoin (BTC) price is rounded to 3 decimal digits. More digits would be hardly readable but it would be easy to change that;
+ - The app displays only one currency: USD, assuming our market is domestic (US). It would be fairly easy to extend the number of currencies supported by the application;
+ - the value of the bitcoin (BTC) price is rounded to 3 decimal digits. More digits would be hardly readable but it would be easy to change if needed;
  - the app displays only the "close" value (V.S. high, low, open values). It would be fairly easy to add more values and display/serve them;
- - the app will display a timeline translated to the user's browser time zone;
- - the information served by the API doesn't require authentication nor encryption. The data is not sensitive at all (already present publicly);
+ - the app  displays a timeline translated to the user's browser time zone;
+ - the information served by the API doesn't require authentication nor uses encryption. The data is not sensitive at all (already present publicly);
 
 ## Out of scope
 
@@ -83,17 +83,17 @@ The following items are out of scope of the MVP:
 
 ## Architecture
 
-The architectural decision have been strongly influenced by the available tools and products at the moment.
+The architectural decision have been strongly influenced by my personal context (available tools, products and knowledge at the moment).
 
-The back-end is coded in PHP version `7.3` running on a Apache server.
+The back-end is coded in PHP version `7.3` running on an Apache server.
 The cached values are coming from Yahoo (third party) chart api and are stored in a MySQL database version `8.0`.
-The duo PHP-MySQL is economic and robust for a starter. 
+I think that the duo PHP-MySQL is economic and robust for a starter. 
 
 The front-end is a React application, version `3.4.1` compiled with Node version `3.12`.
 React is, as I wrote, one of the most advanced front-end frameworks IMO.
 
-For easy setup and scaling it has been chosen to virtualize those 3 main modules in orchestrated Docker containers (Docker version `19.03.0`).
-Documentation for both development and production environments is available in the [repository](https://github.com/ClemRz/bitcoin-analyzer).
+For an easy setup and scaling I chose to virtualize those 3 main modules in orchestrated Docker containers (Docker version `19.03.0`).
+Documentation for both development and production environments deployment is available in the [repository](https://github.com/ClemRz/bitcoin-analyzer).
 
 To facilitate future collaboration, all the code and instructions are versioned using git and available to the public on [Github](https://github.com).
 
@@ -101,27 +101,27 @@ To facilitate future collaboration, all the code and instructions are versioned 
 
 The back-end application has three entry points:
 
- - a REST API meant to serve data to web applications;
- - an initialization script meant to be executed via CLI or by the Docker orchestration script;
- - an updater script meant to be executed periodically via a Cron job to keep the database up to date. It can also be executed by CLI when needed.
+ - a REST-like API meant to serve data to web applications;
+ - an initialization script meant to be executed via CLI or during Docker orchestration;
+ - an updater script meant to be executed periodically via a Cron job to keep the database up to date. It can also be executed manually via CLI on demand.
 
 The database is composed of three very simple tables, each one containing a different granularity of data. All of them have two columns for unix timestamps and bitcoin USD value.
 
-The granularity of data stored, one day, one hour and one minute intervals, allows for an easy clusterization and light data transfer and display.
+The granularities of data stored, one day, one hour and one minute intervals, allow for an easy clusterization and light data transfer and display.
 
 The interaction between the entry points (API, CLI, cron) and the database or the third-party service (Yahoo) is performed in a MVC design pattern.
 
 The API serves the data via the `json` format which, along with `xml` is very popular. PHP has a set of core functions to translate form and to `json` which makes it handy. The JavaScript interprets it naturally. Nevertheless, adding another format (like `xml`) would be very easy thanks to the architectural runway in place.
 
-A `.htaccess` file rewrites the API url to the front controller (`index.php`) and encapsulates the rest of the code.
+A `.htaccess` file rewrites the API url to the front controller (`index.php`) encapsulating the rest of the code.
 
 ![php diagram](https://github.com/ClemRz/bitcoin-analyzer/raw/master/documents/diagram.png "PHP diagram")
 
 ## Front-end
 
-The front-end is a one-page application (no router needed) which leverages asynchronous JavaScript to obtain the numerical data which then is displayed as a chart. 
+The front-end is a one-page application (no router needed) which leverages asynchronous JavaScript to obtain the numerical data displayed as a chart. 
 
-The chart component as well as the date-picker are external dependencies and most of the primitive components (alerts, accordion, etc.) are React bootstrap components.
+The chart component as well as the date-picker are obtained from external dependencies and most of the primitive components (alerts, accordion, etc.) are React bootstrap components.
 
 A home-made wrapper for the `fetch` statement (`Query` component) allows reusability an versatility. It also solves race-conditions related issues by performing in-flight abortion of a request before sending another. 
 
@@ -131,9 +131,9 @@ Finally the custom alert (`CustomAlert` component) translates usage and API erro
 
 # What's next
 
-Having more time I would certainly have secured the front and the back ends with SSL protocol.
+Having more time I would certainly have secured the front and the back ends interactions under SSL protocol.
 
-I am not sure PHP/MySQL is the most efficient choice for this kind of application. For instance the relational aspect of MySQL is not used at all, a non-relational database could be a better choice. Also a functional programming language might be faster when it comes to treat a good amount of data.
+I am not sure if PHP/MySQL is the most efficient choice for this kind of application. For instance the relational aspect of MySQL is not used at all, a non-relational database could be a better choice. Also a functional programming language might be faster when it comes to treat a good amount of data.
 
 The out-of-scope items could be treated, starting with testing and CI pipeline. When more developers contribute to a project it helps keeping the quality of the product under control.
 
