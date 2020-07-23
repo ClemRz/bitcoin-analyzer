@@ -63,7 +63,7 @@ This sums 30h, I'd add a 20% more for unforeseen situations which brings it up t
 
 ## Assumptions
 
-The following assumptions were made during development of the MVP. For some of them the code allows an easy resolution.
+I made the following assumptions during the development of the MVP. For some of them the code allows an easy resolution.
 
  - The app displays only one currency: USD, assuming our market is domestic (US). It would be fairly easy to extend the number of currencies supported by the application;
  - the value of the bitcoin (BTC) price is rounded to 3 decimal digits. More digits would be hardly readable but it would be easy to change if needed;
@@ -134,6 +134,9 @@ Finally the custom alert (`CustomAlert` component) translates usage and API erro
 Having more time I would certainly have secured the front and the back ends interactions under SSL protocol.
 
 I am not sure if PHP/MySQL is the most efficient choice for this kind of application. For instance the relational aspect of MySQL is not used at all, a non-relational database could be a better choice. Also a functional programming language might be faster when it comes to treat a good amount of data.
+
+The Yahoo service providing the source of truth present some restrictions, one minute interval data are available only for the las seven days for instance.
+A deeper research of an alternate source of truth might be needed in order to consolidate the initial state of the database.
 
 The out-of-scope items could be treated, starting with testing and CI pipeline. When more developers contribute to a project it helps keeping the quality of the product under control.
 
