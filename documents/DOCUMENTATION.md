@@ -65,16 +65,18 @@ This sums 30h, I'd add a 20% more for unforeseen situations which brings it up t
 
 The following assumptions were made during development of the MVP. For some of them the code allows an easy resolution.
 
- - The app makes available only one currency: USD;
- - the value of the bitcoin (BTC) price is rounded to 3 decimal digits;
- - the app displays only the "close" value (V.S. high, low, open values);
- - the app will display a timeline translated to the user's time zone.
+ - The app makes available only one currency: USD, assuming our market is domestic (US). It would be fairly easy to evolve the application for more currencies;
+ - the value of the bitcoin (BTC) price is rounded to 3 decimal digits. More digits would be hardly readable but it would be easy to change that;
+ - the app displays only the "close" value (V.S. high, low, open values). It would be fairly easy to add more values and display/serve them;
+ - the app will display a timeline translated to the user's browser time zone;
+ - the information served by the API doesn't require authentication nor encryption. The data is not sensitive at all (already present publicly);
 
 ## Out of scope
 
 The following items are out of scope of the MVP:
 
  - unit testing, integration testing and UI testing;
+ - CI and CD pipelines;
  - accessibility (a11y);
  - internationalization (i18n);
  - responsiveness.
@@ -91,29 +93,51 @@ The front-end is a React application, version `3.4.1` compiled with Node version
 React is, as I wrote, one of the most advanced front-end frameworks IMO.
 
 For easy setup and scaling it has been chosen to virtualize those 3 main modules in orchestrated Docker containers (Docker version `19.03.0`).
-Documentation for both development and production environments is available in the code [repository](https://github.com/ClemRz/bitcoin-analyzer).
+Documentation for both development and production environments is available in the [repository](https://github.com/ClemRz/bitcoin-analyzer).
 
 To facilitate future collaboration, all the code and instructions are versioned using git and available to the public on [Github](https://github.com).
-
-[ToDo Docker containers arrangement diagram]
 
 ## Back-end
 
 The back-end application has three entry points:
 
- - A REST API meant to be polled by web applications
- - An initialization script meant to be executed via CLI or by the Docker orchestration script
- - An updater script meant to be executed periodically via a Cron job. It can also be executed by CLI when needed.
+ - a REST API meant to serve data to web applications;
+ - an initialization script meant to be executed via CLI or by the Docker orchestration script;
+ - an updater script meant to be executed periodically via a Cron job to keep the database up to date. It can also be executed by CLI when needed.
 
 The database is composed of three very simple tables, each one containing a different granularity of data. All of them have two columns for unix timestamps and bitcoin USD value.
 
 The granularity of data stored, one day, one hour and one minute intervals, allows for an easy clusterization and light data transfer and display.
 
+The interaction between the entry points (API, CLI, cron) and the database or the third-party service (Yahoo) is performed in a MVC design pattern.
+
+The API serves the data via the `json` format which, along with `xml` is very popular. PHP has a set of core functions to translate form and to `json` which makes it handy. The JavaScript interprets it naturally. Nevertheless, adding another format (like `xml`) would be very easy thanks to the architectural runway in place.
+
 [ToDo back-end classes and db diagram]
 
 ## Front-end
 
-[ToDo]
+The front-end is a one-page application (no router needed) which leverages asynchronous JavaScript to obtain the numerical data which then is displayed as a chart. 
+
+The chart component as well as the date-picker are external dependencies and most of the primitive components (alerts, accordion, etc.) are React bootstrap components.
+
+A home-made wrapper for the `fetch` statement (`Query` component) allows reusability an versatility. It also solves race-conditions related issues by performing in-flight abortion of a request before sending another. 
+
+The chart component is also wrapped in a layer (`ChartQuery` component) that controls the data fetched before it is displayed.
+
+Finally the custom alert (`CustomAlert` component) translates usage and API errors into readable UI messages with optionally more in-depth information. 
+
+# What's next
+
+Having more time I would certainly have secured the front and the back ends with SSL protocol.
+
+I am not sure PHP/MySQL is the most efficient choice for this kind of application. For instance the relational aspect of MySQL is not used at all, a non-relational database could be a better choice. Also a functional programming language might be faster when it comes to treat a good amount of data.
+
+The out-of-scope items could be treated, starting with testing and CI pipeline. When more developers contribute to a project it helps keeping the quality of the product under control.
+
+A11y, i18n and responsiveness are becoming quite important subjects and would be good enhancements to this application.
+
+-- Thank you for reading --
 
 ---
 
