@@ -42,7 +42,7 @@ The rest of the back-end `.env` variables can be set as you wish, both the PHP a
 Make sure the `bitcoin-analyzer-front/.env` is set like so:
 
 ```shell script
-REACT_APP_API_URL=http://localhost:8081/api/%1/%2/%3.json
+REACT_APP_API_URL=http://localhost:8081/api/%1/%2/%3
 ```
 
 #### For development
