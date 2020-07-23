@@ -137,12 +137,15 @@ Finally the custom alert (`CustomAlert` component) translates usage and API erro
 
 Having more time I would certainly have secured the front and the back ends interactions under SSL protocol.
 
-I am not sure if PHP/MySQL is the most efficient choice for this kind of application. For instance the relational aspect of MySQL is not used at all, a non-relational database could be a better choice. Also a functional programming language might be faster when it comes to treat a good amount of data.
+I am not sure if PHP/MySQL is the most suited choice for this kind of application.
+For instance the relational aspect of MySQL is not used at all.
+A non-relational database might be more suitable in this situation.
+Also a functional programming language might be faster when it comes to process a good amount of data.
 
 The Yahoo service providing the source of truth present some restrictions, one minute interval data are available only for the las seven days for instance.
 A deeper research of an alternate source of truth might be needed in order to consolidate the initial state of the database.
 
-The out-of-scope items could be treated, starting with testing and CI pipeline. When more developers contribute to a project it helps keeping the quality of the product under control.
+The out-of-scope items could be taken care of, starting with testing and CI pipeline. When more developers contribute to a project it helps keeping the quality of the product under control.
 
 A11y, i18n and responsiveness are becoming quite important subjects and would be good enhancements to this application.
 
