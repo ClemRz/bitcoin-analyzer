@@ -71,7 +71,7 @@ Then visit http://localhost
 
 ## Individual modules deployment
 
-If you want to deploy the front and the back individually, please follow these instructions:
+If you want to deploy the front and the back individually, please follow these instructions instead:
 
  - Deploying the front-end: https://github.com/ClemRz/bitcoin-analyzer-front/blob/master/README.md
  - Deploying the back-end: https://github.com/ClemRz/bitcoin-analyzer-back/blob/master/README.md
