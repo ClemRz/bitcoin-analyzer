@@ -113,7 +113,9 @@ The interaction between the entry points (API, CLI, cron) and the database or th
 
 The API serves the data via the `json` format which, along with `xml` is very popular. PHP has a set of core functions to translate form and to `json` which makes it handy. The JavaScript interprets it naturally. Nevertheless, adding another format (like `xml`) would be very easy thanks to the architectural runway in place.
 
-[ToDo back-end classes and db diagram]
+A `.htaccess` file rewrites the API url to the front controller (`index.php`) and encapsulates the rest of the code.
+
+![php diagram](https://github.com/ClemRz/bitcoin-analyzer/raw/master/documents/diagram.png "PHP diagram")
 
 ## Front-end
 
