@@ -81,6 +81,13 @@ The following items are out of scope of the MVP:
  - internationalization (i18n);
  - responsiveness.
 
+## Call-outs
+
+I wasn't able to configure the docker environment so the API and the front-end would use SSL protocol.
+This is the reason why everything is on HTTP.
+
+I'm aware that this is far from ideal and I would strongly recommend to fix it in the case we wanted to deploy such and app in the real world.
+
 ## Architecture
 
 The architectural decision have been strongly influenced by my personal context (available tools, products and knowledge at the moment).
@@ -135,8 +142,6 @@ The chart component is also wrapped in a layer (`ChartQuery` component) that con
 Finally the custom alert (`CustomAlert` component) translates usage and API errors into readable UI messages with optionally more in-depth information. 
 
 # What's next
-
-Having more time I would certainly have secured the front and the back ends interactions under SSL protocol.
 
 I am not sure if PHP/MySQL is the most suited choice for this kind of application.
 For instance the relational aspect of MySQL is not used at all.
