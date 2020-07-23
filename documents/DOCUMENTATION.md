@@ -89,8 +89,12 @@ The back-end is coded in PHP version `7.3` running on an Apache server.
 The cached values are coming from Yahoo (third party) chart api and are stored in a MySQL database version `8.0`.
 I think that the duo PHP-MySQL is economic and robust for a starter. 
 
+The PHP dependencies are managed via `Composer`.
+
 The front-end is a React application, version `3.4.1` compiled with Node version `3.12`.
 React is, as I wrote, one of the most advanced front-end frameworks IMO.
+
+The React dependencies are managed via `npm`.
 
 For an easy setup and scaling I chose to virtualize those 3 main modules in orchestrated Docker containers (Docker version `19.03.0`).
 Documentation for both development and production environments deployment is available in the [repository](https://github.com/ClemRz/bitcoin-analyzer).
