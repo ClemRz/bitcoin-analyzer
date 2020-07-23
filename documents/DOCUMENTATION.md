@@ -115,7 +115,8 @@ The granularities of data stored, one day, one hour and one minute intervals, al
 
 The interaction between the entry points (API, CLI, cron) and the database or the third-party service (Yahoo) is performed in a MVC design pattern.
 
-The API serves the data via the `json` format which, along with `xml` is very popular. PHP has a set of core functions to translate form and to `json` which makes it handy. The JavaScript interprets it naturally. Nevertheless, adding another format (like `xml`) would be very easy thanks to the architectural runway in place.
+The API serves the data via the `json` format, which, along with `xml` is very popular. PHP has a set of core functions to translate form and to `json` which makes it handy.
+The JavaScript interprets it naturally. Nevertheless, adding another format (like `xml`) would be very easy thanks to the architectural runway in place. The API interface is described in [this document](https://github.com/ClemRz/bitcoin-analyzer-back/blob/master/README.md#api-reference).
 
 A `.htaccess` file rewrites the API url to the front controller (`index.php`) encapsulating the rest of the code.
 
