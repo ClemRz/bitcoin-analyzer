@@ -21,14 +21,14 @@ Docker version `19.03.0+`
 
 ### Steps
 
-Clone this repository on your machine:
+1- Clone this repository on your machine:
 
 ```shell script
 $ git clone --recurse-submodules https://github.com/ClemRz/bitcoin-analyzer.git
 $ cd bitcoin-analyzer
 ```
 
-Make sure you copy `bitcoin-analyzer-back/src/.env.example` to `bitcoin-analyzer-back/src/.env` and fill in the database access information.
+2- Copy `bitcoin-analyzer-back/src/.env.example` to `bitcoin-analyzer-back/src/.env` and fill in the database access information.
 
 When using docker-compose it is important to set the host and the port accordingly:
 
@@ -39,15 +39,13 @@ DB_PORT=3306
 
 The rest of the back-end `.env` variables can be set as you wish, both the PHP application and Docker will take them into account.
 
-Make sure the `bitcoin-analyzer-front/.env` is set like so:
+3- Make sure the `bitcoin-analyzer-front/.env` is set like so:
 
 ```shell script
 REACT_APP_API_URL=http://localhost:8081/api/%1/%2/%3
 ```
 
-#### For development
-
-At the root of the project, run:
+4a- For development, at the root of the project, run:
 
 ```shell script
 $ docker-compose -f bitcoin-analyzer-back/docker-compose.yml -f docker-compose.yml up
@@ -55,9 +53,7 @@ $ docker-compose -f bitcoin-analyzer-back/docker-compose.yml -f docker-compose.y
 
 Then visit http://localhost:3000
 
-#### For production
-
-At the root of the project, run:
+4b- For production, at the root of the project, run:
 
 ```shell script
 $ docker-compose -f bitcoin-analyzer-back/docker-compose.yml -f docker-compose.prod.yml up -d
