@@ -63,7 +63,7 @@ At the root of the project, run:
 $ docker-compose -f bitcoin-analyzer-back/docker-compose.yml -f docker-compose.prod.yml up -d
 ```
 
-Then visit http://localhost
+Then visit http://localhost (if you get an error or an empty/bad-granularity chart, wait a bit and refresh the page, docker might still be working on the initialization).
 
 ## Individual modules deployment
 
